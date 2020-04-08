@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>搜索</title>
+    <style type="text/css">
+        .search {
+            width: 700px;
+            margin: 40px auto 20px 20px;
+            display: flex;
+        }
+
+        .search input {
+            height: 30px;
+            width:200px;
+            border: 1px solid black;
+            box-sizing: border-box;
+            padding-left: 10px;
+           
+        }
+
+        .search button {
+            float: right;
+            height: 30px;
+            margin-left: 20px;
+            background-color: yellowgreen;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+                var oTab = document.getElementById('tab1'); //表
+                var oTxt = document.getElementById('name'); //name
+                var oTxt = document.getElementById('num'); //name
+                var oBtn = document.getElementById('btn1'); 
+
+                oBtn.onclick = function () {
+                    for (var i = 0; i < oTab.tBodies[0].rows.length; i++) {
+                        oTab.tBodies[0].rows[i].style.display = 'none';
+                        if (oTxt.value.toLowerCase() == oTab.tBodies[0].rows[i].cells[1].innerHTML.toLowerCase()) {
+                            oTab.tBodies[0].rows[i].style.display = 'block';
+                        }
+                    }
+                }
+            };
+    </script>
+</head>
+
+<body>
+    <div class="search">
+        <span>姓名：<input type="text" placeholder="请输入..." name="" id="name" value=""/></span>&nbsp;&nbsp;
+        <span>学号：<input type="text" placeholder="请输入..." name="" id="num" value="" /></span>
+        <button id='btn1' type='button'>搜索</button>
+    </div>
+</body>
+
+</html>
