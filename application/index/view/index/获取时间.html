@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Date对象的使用</title>
+    <script type="text/javascript">
+        var now = new Date(); //对系统当前时间创建Date对象
+        var year=now.getFullYear(); //获取以四位数表示的年份
+        var month=now.getMonth()+1; //获取月份
+        var date=now.getDate();//获取日期
+        var day=now.getDay(); //获取星期数
+        var hour=now.getHours();//获取小时数
+        var minute=now.getMinutes();//获取分钟数
+        var second=now.getSeconds();//获取秒数
+        //创建星期数组
+        var week=new Array("星期日","星期一","星期二","星期三","星期四","星期五","星期六");
+        hour=(hour<10) ? "0"+hour:hour;//以两位数表示小时
+        minute=(minute<10) ? "0"+minute:minute;//以两位数表示分钟
+        second=(second<10) ? "0"+second:second;//以两位数表示秒数
+        document.write("现在时间是："+year+"年"+month+"月"+date+"日"+hour+":"+minute+
+            ":"+second+" "+week[day]+"<hr>");
+    </script>
+</head>
+<body>
+</body>
+</html>
