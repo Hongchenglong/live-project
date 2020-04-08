@@ -7,8 +7,9 @@
 	<style type="text/css">
 		table {
 			border: 1px solid;
-			width: 600px;
-			height: 350px;
+			width: 40%;
+			height: 100%;
+			overflow: auto
 		}
 
 		td {
@@ -25,32 +26,40 @@
 		}
 
 		#wrap {
-			width: 1000px;
+			width: 100%;
 			height: 2000px;
 			border: 1px;
 		}
 
 		#header {
 			border: 1px;
-			width: 980px;
+			width: 100%;
 			height: 100px;
 		}
 
 		#a {
-			width: 950px;
+			width: 100%;
 			height: 60px;
 			background: lightgreen;
 			color: #ffffff;
 			font-size: 25px;
 			line-height: 60px;
-			padding-left: 20px;
+			text-align: center;
 		}
 
 		#header li {
 			list-style-type: none;
-			float: left;
 			font-size: 12px;
-			padding-right: 50px;
+		}
+
+		.left {
+			float: left;
+			padding-left: 40%;
+		}
+
+		.right {
+			float: right;
+			padding-right: 40%;
 		}
 
 		#header a:link {
@@ -64,8 +73,32 @@
 		}
 
 		#header a:hover {
-			color: #ff2a2a;
+			color: lightgreen;
 			text-decoration: none
+		}
+
+		.button {
+			border-radius: 12px;
+		}
+
+		.button:hover {
+			background-color: lightgreen;
+			color: white;
+		}
+
+		.search {
+			width: 100%;
+			padding-left: 44%;
+		}
+
+		.information {
+			width: 100%;
+			padding-left: 30%;
+		}
+
+		form {
+			width: 100%;
+			padding-left: 20%;
 		}
 	</style>
 	<script type="text/javascript">
@@ -75,57 +108,70 @@
 		function unlight(obj) {
 			obj.removeAttribute('class')
 		}
+		function check_info() {
+			var name = document.getElementById("txt2").value;
+			var num = document.getElementById("txt1").value;
+			reg1 = /^[\u4E00-\u9FA5]{2,6}$/;
+			if (!reg1.test(name)) {
+				alert('您输入的名字格式有误！');
+			}
+			var reg2 = /^\d{9}$/
+			if (!reg2.test(num)) {
+				alert('您输入的学号格式有误！');
+			}
+		}
 	</script>
 </head>
 
 <body>
 	<div id="wrap">
 		<div id="header">
-			<div id="a">校园保卫部门</div>
+			<div id="a"><a href='index.php?s=index/index/index'>校园保卫部门</a></div>
 			<ul>
-				<li><a href="#">登记</a></li>
-				<li><a href="#">同学信息</a></li>
+				<li class="left"><a href="#">登记</a></li>
+				<li class="right"><a href="#">同学信息</a></li>
 			</ul>
 		</div>
-
+		<br>
 		<form name='uploadForm' method='post' action='index.php?s=index/index/register' enctype='multipart/form-data'>
-			<label for="">学号：</label><input type="text" id="txt1" name="studentId">
-			<label for="">姓名：</label><input type="text" id="txt2" name="name">
-			<label for="">进入时间：</label><input type="datetime" id="txt3" name="entryTime">
-			<label for="">离开时间：</label><input type="text" id="txt3" name="departureTime">
-			<input id="btn" type='submit' value='提交'></td>
+			<label for="">学号：</label><input type="text" id="txt1" name="studentId" required>
+			<label for="">姓名：</label><input type="text" id="txt2" name="name" required>
+			<label for="">进入时间：</label><input type="datetime-local" id="txt3" name="entryTime" required>
+			<input id="btn" type='submit' value='提交' onclick="check_info()"></td>
 		</form>
-
-
 		<br>
 		<!--搜索-->
-		<div>
-			<input type="text" size="30" placeholder="请输入学号">
-			<input type="button" value="搜索" />
+
+		<div class="search">
+			<form name='uploadForm' method='post' action='index.php?s=index/index/search' enctype='multipart/form-data'>
+				<input type="text" size="20" name="studentId" placeholder="请输入学号" required>
+				<input class="button" type="submit" value="搜索" />
+			</form>
 		</div>
 		<br>
 		<!--显示信息-->
-		<table cellpadding="0" cellspacing="0">
-			<tr class="head">
-				<td>学号</td>
-				<td>姓名</td>
-				<td>进入时间</td>
-				<td>离开时间</td>
-			</tr>
-			<?PHP
-			use \think\Db;
-			    $data = Db::query('select * from student');
-			?>
-			{volist name='data' id='row'}
-			<tr onmouseover="light(this)" onmouseout="unlight(this)">
-				<td>{$row.studentId}</td>
-				<td>{$row.name}</td>
-				<td>{$row.entryTime}</td>
-				<td>{$row.departureTime}</td>
-			</tr>
-			{/volist}
-
-		</table>
+		<div class="information">
+			<table cellpadding="0" cellspacing="0">
+				<tr class="head">
+					<td>学号</td>
+					<td>姓名</td>
+					<td>进入时间</td>
+					<td>离开时间</td>
+				</tr>
+				<?PHP
+					use \think\Db;
+					$data = Db::query('select * from student order by studentId');
+				?>
+				{volist name='data' id='row'}
+				<tr onmouseover="light(this)" onmouseout="unlight(this)">
+					<td>{$row.studentId}</td>
+					<td>{$row.name}</td>
+					<td>{$row.entryTime}</td>
+					<td>{$row.departureTime}</td>
+				</tr>
+				{/volist}
+			</table>
+		</div>
 	</div>
 </body>
 

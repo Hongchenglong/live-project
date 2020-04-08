@@ -28,9 +28,12 @@ class Index extends BaseController
 		$studentId = $_POST['studentId'];
 		$name = $_POST['name'];
 		$entryTime = $_POST['entryTime'];
-		$entryTime = date('Y-m-d', time());
-		$departureTime = $_POST['departureTime'];
-		
+
+		if (empty($_POST['departureTime'])) {
+			$departureTime = null;
+		} else {
+			$departureTime = $_POST['departureTime'];
+		}
 
 		$data = array();
 		$data['studentId'] = $studentId;
@@ -44,5 +47,14 @@ class Index extends BaseController
 		// $this->redirect("http://123.56.93.164/live-project/public/index.php");
 		$this->redirect("http://localhost:8080/live-project/public/index.php");
 		// return $this->fetch();
+	}
+
+	public function search() {
+		
+		$studentId = $_POST['studentId'];
+		$data = Db::query('select * from student where studentId = ' . $studentId);
+
+		return $this->fetch();
+
 	}
 }
