@@ -99,8 +99,8 @@
     hour=(hour<10) ? "0"+hour:hour;//以两位数表示小时
     minute=(minute<10) ? "0"+minute:minute;//以两位数表示分钟
     second=(second<10) ? "0"+second:second;//以两位数表示秒数
-    document.getElementById("ntime").value = (year+"年"+month+"月"+date+"日"+hour+":"+minute+
-        ":"+second+" "+week[day]);
+    document.getElementById("ntime").value = (year+"-"+month+"-"+date+" "+hour+":"+minute+
+        ":"+second);
     }
 </script>
 </body>
