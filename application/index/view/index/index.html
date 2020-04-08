@@ -83,25 +83,25 @@
 		<div id="header">
 			<div id="a">校园保卫部门</div>
 			<ul>
-				<li><a href="index.php?s=index/index/register">登记</a></li>
+				<li><a href="#">登记</a></li>
 				<li><a href="#">同学信息</a></li>
 			</ul>
 		</div>
 
-<form name='uploadForm' method='post' action='index.php?s=index/index/register' enctype='multipart/form-data'>
-<label for="">学号：</label><input type="text" id="txt1" name="studentId">
-<label for="">姓名：</label><input type="text" id="txt2" name="name">
-<label for="">进入时间：</label><input type="date" id="txt3" name="entryTime">
-<label for="">离开时间：</label><input type="date" id="txt3" name="departureTime">
-<input id="btn" type='submit' value='提交'></td>
-</form>
+		<form name='uploadForm' method='post' action='index.php?s=index/index/register' enctype='multipart/form-data'>
+			<label for="">学号：</label><input type="text" id="txt1" name="studentId">
+			<label for="">姓名：</label><input type="text" id="txt2" name="name">
+			<label for="">进入时间：</label><input type="datetime" id="txt3" name="entryTime">
+			<label for="">离开时间：</label><input type="text" id="txt3" name="departureTime">
+			<input id="btn" type='submit' value='提交'></td>
+		</form>
 
 
 		<br>
 		<!--搜索-->
 		<div>
 			<input type="text" size="30" placeholder="请输入学号">
-			<input  type="button"  value="搜索"/>
+			<input type="button" value="搜索" />
 		</div>
 		<br>
 		<!--显示信息-->
@@ -124,19 +124,6 @@
 				<td>{$row.departureTime}</td>
 			</tr>
 			{/volist}
-
-			<tr onmouseover="light(this)" onmouseout="unlight(this)">
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr onmouseover="light(this)" onmouseout="unlight(this)">
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
 
 		</table>
 	</div>

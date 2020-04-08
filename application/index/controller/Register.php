@@ -13,6 +13,5 @@ class Register extends BaseController
 
         return $this->fetch();
 
-
     }
 }

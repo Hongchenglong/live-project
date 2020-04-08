@@ -28,7 +28,7 @@ class Index extends BaseController
 		$studentId = $_POST['studentId'];
 		$name = $_POST['name'];
 		$entryTime = $_POST['entryTime'];
-		// $entryTime = date('Y-m-d', time());
+		$entryTime = date('Y-m-d', time());
 		$departureTime = $_POST['departureTime'];
 		
 
@@ -41,6 +41,7 @@ class Index extends BaseController
 
 		Db::table('student')->insert($data);
 
+		// $this->redirect("http://123.56.93.164/live-project/public/index.php");
 		$this->redirect("http://localhost:8080/live-project/public/index.php");
 		// return $this->fetch();
 	}
