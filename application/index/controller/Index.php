@@ -19,4 +19,10 @@ class Index extends BaseController
 		return $this->fetch();
 	}
 
+	
+	public function register()
+	{
+		// 不带任何参数 自动定位当前操作的模板文件
+		return $this->fetch();
+	}
 }
