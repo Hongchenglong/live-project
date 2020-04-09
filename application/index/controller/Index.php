@@ -18,6 +18,10 @@ class Index extends BaseController
 	 */
 	public function index()
 	{
+		$student = Db::table('student')
+			->order('studentId')
+			->paginate(10);
+		$this->assign("student", $student);
 		// 不带任何参数 自动定位当前操作的模板文件
 		return $this->fetch();
 	}
@@ -29,9 +33,9 @@ class Index extends BaseController
 		$name = $_POST['name'];
 		$entryTime = date('Y-m-d H:i:s', time());
 
-		if (strlen($studentId) != 9 || strlen($name) < 4) {
-			$this->redirect("http://123.56.93.164/live-project/public/index.php");
-		} 
+		if (strlen($studentId) != 9 || strlen($name) < 4 || strlen($name) > 12) {
+			$this->redirect("http://oeong.xyz/live-project/public/index.php");
+		}
 
 		$data = array();
 		$data['studentId'] = $studentId;
@@ -42,11 +46,26 @@ class Index extends BaseController
 
 		Db::table('student')->insert($data);
 
-		$this->redirect("http://123.56.93.164/live-project/public/index.php");
+		$this->redirect("http://oeong.xyz/live-project/public/index.php");
 	}
 
 	public function search()
 	{
+
+		if (!empty($_POST['studentId'])) {
+			$studentId = $_POST['studentId'];
+			cookie('studentId', $_POST['studentId'], 3600);
+		} else
+			$studentId = cookie('studentId');
+
+
+		$where = array();
+		$where['studentId'] = $studentId;
+		$student = Db::table('student')
+			->where($where)
+			->order('entryTime desc')
+			->select();
+		$this->assign("student", $student);
 		
 		return $this->fetch();
 	}
@@ -54,16 +73,11 @@ class Index extends BaseController
 
 	public function leave()
 	{
-
-
 		$id = intval(Request::instance()->get('id'));
 
-		// $departureTime = date('Y-m-d', time());
 		DB::table('student')->where('id', $id)->update(['departureTime' => date('Y-m-d H:i:s')]);
-		// $studentId = DB::table('student')->where('id', $id)->field('studentId')->find();
 
-	
-		$this->redirect("http://123.56.93.164/live-project/public/index.php?s=index/index/search");
+		$this->redirect("http://oeong.xyz/live-project/public/index.php?s=index/index/search");
 	}
 
 
@@ -72,6 +86,6 @@ class Index extends BaseController
 
 		$id = intval(Request::instance()->get('id'));
 		DB::table('student')->where('id', $id)->delete();
-		$this->redirect("http://123.56.93.164/live-project/public/index.php");
+		$this->redirect("http://oeong.xyz/live-project/public/index.php");
 	}
 }

@@ -1,127 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <title>校园保卫部</title>
-    <style type="text/css">
-        table {
-            border: 1px solid;
-            width: 40%;
-            height: 100%;
-            overflow: auto
-        }
-
-        td {
-            text-align: center;
-            border: 1px solid black
-        }
-
-        tr:nth-child(1) {
-            font-weight: bold;
-        }
-
-        .highLight {
-            background-color: lightgray
-        }
-
-        #wrap {
-            width: 100%;
-            height: 2000px;
-            border: 1px;
-        }
-
-        #header {
-            border: 1px;
-            width: 100%;
-            height: 100px;
-        }
-
-        #a {
-            width: 100%;
-            height: 60px;
-            background: lightgreen;
-            color: #ffffff;
-            font-size: 25px;
-            line-height: 60px;
-            text-align: center;
-        }
-
-        #header li {
-            list-style-type: none;
-            font-size: 12px;
-        }
-
-        .left {
-            float: left;
-            padding-left: 40%;
-        }
-
-        .right {
-            float: right;
-            padding-right: 40%;
-        }
-
-        #header a:link {
-            color: #808080;
-            text-decoration: none
-        }
-
-        #header a:visited {
-            color: #808080;
-            text-decoration: none
-        }
-
-        #header a:hover {
-            color: lightgreen;
-            text-decoration: none
-        }
-
-        .button {
-            border-radius: 12px;
-        }
-
-        .button:hover {
-            background-color: lightgreen;
-            color: white;
-        }
-
-        .search {
-            width: 100%;
-            padding-left: 44%;
-        }
-
-        .information {
-            width: 100%;
-            padding-left: 30%;
-        }
-
-        .form1 {
-            width: 100%;
-            padding-left: 28%;
-        }
-    </style>
-    <script type="text/javascript">
-        function light(obj) {
-            obj.setAttribute('class', 'highLight');
-        }
-        function unlight(obj) {
-            obj.removeAttribute('class')
-        }
-        function check_info() {
-            var name = document.getElementById("txt2").value;
-            var num = document.getElementById("txt1").value;
-            reg1 = /^[\u4E00-\u9FA5]{2,6}$/;
-            if (!reg1.test(name)) {
-                alert('您输入的名字格式有误！');
-            }
-            var reg2 = /^\d{9}$/
-            if (!reg2.test(num)) {
-                alert('您输入的学号格式有误！');
-            }
-        }
-    </script>
-</head>
+{include file='public/header' /}
 
 <body>
     <div id="wrap">
@@ -153,23 +30,7 @@
                     <td>离开时间</td>
                     <td>离开登记</td>
                 </tr>
-
-
-                <?php
-                    use \think\Db;
-                                     
-                    if (!empty($_POST['studentId'])) {
-                        $studentId = $_POST['studentId'];
-                        cookie('studentId', $_POST['studentId'] ,3600); 
-                    }                   
-                    else 
-                        $studentId = cookie('studentId');
-		
-	            	$data = Db::query('select * from student where studentId = ' . $studentId . ' order by entryTime desc');
-                    
-                 ?>
-
-                {volist name='data' id='row'}
+                {volist name='student' id='row'}
                 <tr onmouseover="light(this)" onmouseout="unlight(this)">
                     <td>{$row.studentId}</td>
                     <td>{$row.name}</td>
@@ -186,6 +47,7 @@
 
                 {/volist}
             </table>
+
         </div>
     </div>
 </body>
