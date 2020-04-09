@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>显示页面</title>
+    <title>校园保卫部</title>
     <style type="text/css">
         table {
             border: 1px solid;
@@ -96,9 +96,9 @@
             padding-left: 30%;
         }
 
-        form {
+        .form1 {
             width: 100%;
-            padding-left: 20%;
+            padding-left: 28%;
         }
     </style>
     <script type="text/javascript">
@@ -136,14 +136,12 @@
 
         <!--搜索-->
 
-        <div>
-            <form name='uploadForm' method='post' action='index.php?s=index/index/search' enctype='multipart/form-data'>
-                <input type="text" size="30" name="studentId" placeholder="请输入学号" required>
+        <div class="search">
+            <form method='post' action='index.php?s=index/index/search' enctype='multipart/form-data'>
+                <input type="text" size="20" name="studentId" placeholder="请输入学号" required>
                 <input class="button" type="submit" value="搜索" />
             </form>
         </div>
-
-
         <br>
         <!--显示信息-->
         <div class="information">
@@ -153,19 +151,39 @@
                     <td>姓名</td>
                     <td>进入时间</td>
                     <td>离开时间</td>
+                    <td>离开登记</td>
                 </tr>
-                <?PHP
+
+
+                <?php
                     use \think\Db;
-                    $studentId = $_POST['studentId'];
-                    $data = Db::query('select * from student where studentId = ' . $studentId);
-                ?>
+                                     
+                    if (!empty($_POST['studentId'])) {
+                        $studentId = $_POST['studentId'];
+                        cookie('studentId', $_POST['studentId'] ,3600); 
+                    }                   
+                    else 
+                        $studentId = cookie('studentId');
+		
+	            	$data = Db::query('select * from student where studentId = ' . $studentId . ' order by entryTime desc');
+                    
+                 ?>
+
                 {volist name='data' id='row'}
                 <tr onmouseover="light(this)" onmouseout="unlight(this)">
                     <td>{$row.studentId}</td>
                     <td>{$row.name}</td>
                     <td>{$row.entryTime}</td>
                     <td>{$row.departureTime}</td>
+                    <td>
+                        <?PHP 
+                            if (!$row['departureTime']) {
+                                echo '<a href="index.php?s=index/index/leave&id='.$row['id'].'">离开</a>';
+                            }
+                        ?>
+                    </td>
                 </tr>
+
                 {/volist}
             </table>
         </div>

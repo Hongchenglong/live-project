@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>显示页面</title>
+	<title>校园保卫部</title>
 	<style type="text/css">
 		table {
 			border: 1px solid;
@@ -96,10 +96,15 @@
 			padding-left: 30%;
 		}
 
-		form {
+		.form1 {
 			width: 100%;
-			padding-left: 20%;
+			padding-left: 32%;
 		}
+
+		/* .form1 {
+            width: 46%;
+            margin:0 auto ;
+        } */
 	</style>
 	<script type="text/javascript">
 		function light(obj) {
@@ -111,7 +116,7 @@
 		function check_info() {
 			var name = document.getElementById("txt2").value;
 			var num = document.getElementById("txt1").value;
-			reg1 = /^[\u4E00-\u9FA5]{2,6}$/;
+			reg1 = /^[\u4E00-\u9FA5]{3,}$/;
 			if (!reg1.test(name)) {
 				alert('您输入的名字格式有误！');
 			}
@@ -128,16 +133,19 @@
 		<div id="header">
 			<div id="a"><a href='index.php?s=index/index/index'>校园保卫部门</a></div>
 			<ul>
-				<li class="left"><a href="#">登记</a></li>
+				<li class="left"><a href="index.php?s=index/index/index">登记</a></li>
 				<li class="right"><a href="#">同学信息</a></li>
 			</ul>
 		</div>
 		<br>
-		<form name='uploadForm' method='post' action='index.php?s=index/index/register' enctype='multipart/form-data'>
+		<form class="form1" name='uploadForm' method='post' action='index.php?s=index/index/register'
+			enctype='multipart/form-data'>
 			<label for="">学号：</label><input type="text" id="txt1" name="studentId" required>
 			<label for="">姓名：</label><input type="text" id="txt2" name="name" required>
-			<label for="">进入时间：</label><input type="datetime-local" id="txt3" name="entryTime" required>
-			<input id="btn" type='submit' value='提交' onclick="check_info()"></td>
+			<label for="">进入时间：</label><?php
+			echo date('Y-m-d H:i:s', time());
+			?>
+			<input id="btn" class="button" type='submit' value='登记' onclick="check_info()"></td>
 		</form>
 		<br>
 		<!--搜索-->
@@ -157,6 +165,7 @@
 					<td>姓名</td>
 					<td>进入时间</td>
 					<td>离开时间</td>
+					<td>删除记录</td>
 				</tr>
 				<?PHP
 					use \think\Db;
@@ -168,11 +177,14 @@
 					<td>{$row.name}</td>
 					<td>{$row.entryTime}</td>
 					<td>{$row.departureTime}</td>
+					<td>
+						<?PHP
+						echo '<a href="index.php?s=index/index/delete&id='.$row['id'].'">删除</a>';
+						?>
+					</td>
 				</tr>
 				{/volist}
 			</table>
 		</div>
 	</div>
 </body>
-
-</html>
