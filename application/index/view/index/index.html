@@ -22,16 +22,20 @@
 		<br>
 		<!--搜索-->
 
-		<div class="search">
-			<form name='uploadForm' method='post' action='index.php?s=index/index/search' enctype='multipart/form-data'>
-				<input type="text" size="20" name="studentId" placeholder="请输入学号" required>
+
+		<form role="form" name='uploadForm' method='post' action='index.php?s=index/index/search'
+			enctype='multipart/form-data'>
+			<div class="search">
+				<input style="margin-left: 3%;" type="text" size="20" name="studentId" placeholder="请输入学号" required>
 				<input class="button" type="submit" value="搜索" />
-			</form>
-		</div>
+			</div>
+		</form>
+
 		<br>
 		<!--显示信息-->
-		<div class="information">
-			<table cellpadding="0" cellspacing="0">
+		<div class="table-responsive">
+			<table class="table table-striped table-bordered table-hover table-condensed" cellpadding="0"
+				cellspacing="0">
 				<tr class="head">
 					<td>学号</td>
 					<td>姓名</td>
@@ -40,20 +44,31 @@
 					<td>删除记录</td>
 				</tr>
 				{volist name='student' id='row'}
-				<tr onmouseover="light(this)" onmouseout="unlight(this)">
+				<!-- <tr onmouseover="light(this)" onmouseout="unlight(this)"> -->
+				<tr>
 					<td>{$row.studentId}</td>
 					<td>{$row.name}</td>
 					<td>{$row.entryTime}</td>
 					<td>{$row.departureTime}</td>
 					<td>
 						<?PHP
-							echo '<a class="btn btn-danger" href="index.php?s=index/index/delete&id='.$row['id'].'">删除</a>';
+							echo '
+								<a class="btn btn-danger btn-sm" onclick="del()" href="index.php?s=index/index/delete&id='.$row['id'].'">删除</a>';
 						?>
 					</td>
 				</tr>
 				{/volist}
+
+				<!-- <div id="myAlert">
+								<a class="btn btn-danger btn-sm" data-dismiss="alert" href="index.php?s=index/index/delete&id='.$row['id'].'">删除</a></div> -->
 			</table>
 			{$student->render()}
 		</div>
 	</div>
+	<script language="javascript">
+		function del() {
+			alert("删除成功");
+
+		}
+	</script>
 </body>

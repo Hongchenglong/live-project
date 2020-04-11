@@ -33,7 +33,7 @@ class Index extends BaseController
 		$name = $_POST['name'];
 		$entryTime = date('Y-m-d H:i:s', time());
 
-		if (strlen($studentId) != 9 || strlen($name) < 4 || strlen($name) > 12) {
+		if (strlen($studentId) != 9 || strlen($name) < 4 || strlen($name) > 16) {
 			$this->redirect("http://oeong.xyz/live-project/public/index.php");
 		}
 

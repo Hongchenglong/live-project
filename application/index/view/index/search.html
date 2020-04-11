@@ -15,14 +15,15 @@
 
         <div class="search">
             <form method='post' action='index.php?s=index/index/search' enctype='multipart/form-data'>
-                <input type="text" size="20" name="studentId" placeholder="请输入学号" required>
+                <input style="margin-left: 3%;" type="text" size="20" name="studentId" placeholder="请输入学号" required>
                 <input class="button" type="submit" value="搜索" />
             </form>
         </div>
         <br>
         <!--显示信息-->
-        <div class="information">
-            <table cellpadding="0" cellspacing="0">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover table-condensed" cellpadding="0"
+                cellspacing="0">
                 <tr class="head">
                     <td>学号</td>
                     <td>姓名</td>
@@ -31,7 +32,8 @@
                     <td>离开登记</td>
                 </tr>
                 {volist name='student' id='row'}
-                <tr onmouseover="light(this)" onmouseout="unlight(this)">
+                <!-- <tr onmouseover="light(this)" onmouseout="unlight(this)"> -->
+                <tr>
                     <td>{$row.studentId}</td>
                     <td>{$row.name}</td>
                     <td>{$row.entryTime}</td>
@@ -39,7 +41,7 @@
                     <td>
                         <?PHP 
                             if (!$row['departureTime']) {
-                                echo '<a href="index.php?s=index/index/leave&id='.$row['id'].'">离开</a>';
+                                echo '<a class="btn btn-primary btn-sm" href="index.php?s=index/index/leave&id='.$row['id'].'">离开</a>';
                             }
                         ?>
                     </td>
