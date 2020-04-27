@@ -97,7 +97,7 @@ class Index extends BaseController
 		// 	->paginate(10);
 		// $this->assign("student", $student);
 		// header('location: ' . $_SERVER['HTTP_REFERER']);
-		// $this->redirect("http://localhost:8080/live-project/public/index.php?s=index/index/search");
+		$this->redirect("http://localhost:8080/live-project/public/index.php?s=index/index/search");
 	}
 
 
@@ -115,8 +115,8 @@ class Index extends BaseController
 		// 	->where('deleted', 0)
 		// 	->paginate(10);
 		$this->assign("student", $student);
-		header('location: ' . $_SERVER['HTTP_REFERER']);
+		// header('location: ' . $_SERVER['HTTP_REFERER']);
 
-		// $this->redirect("http://localhost:8080/live-project/public/index.php");
+		$this->redirect("http://localhost:8080/live-project/public/index.php");
 	}
 }

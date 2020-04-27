@@ -1,42 +1,43 @@
 {include file='public/header' /}
 
 <body>
+
+    <br>
     <div class="container">
-        <div class="columns">
-            <div class="column col-8 col-mx-auto">
-                <header class="navbar">
-                    <section class="centered">
-                        <div class="navbar-brand mr-2">
-                            <br>
-                            <h2><a href='index.php?s=index/index/index'>校园保卫部门</a></h2>
-                        </div>
-                    </section>
-                </header>
-            </div>
-        </div>
-        <hr>
+        <header class="navbar">
+            <section class="navbar-section">
+            </section>
+            <section class="navbar-center">
+                <h2><a href='index.php?s=index/index/index'>校园保卫部门</a></h2>
+            </section>
+            <section class="navbar-section">
+                <form role="form" name='uploadForm' method='post' action='index.php?s=index/index/search'
+                    enctype='multipart/form-data'>
+                    <div class="input-group input-inline">
+                        <input name="studentId" class="form-input" type="text" placeholder="请输入学号" required>
+                        <button class="btn btn-primary">查找</button>
+                    </div>
+                </form>
+            </section>&nbsp;
+        </header>
+
         <div style="text-align: center;">
-            <form class="form1" name='uploadForm' method='post' action='index.php?s=index/index/register'
+            <form name='uploadForm' method='post' action='index.php?s=index/index/register'
                 enctype='multipart/form-data'>
-                <label for="">学号：</label><input type="text" id="txt1" name="studentId" required>
-                <label for="">姓名：</label><input type="text" id="txt2" name="name" required>
-                <label for="">进入时间：</label><?php
-                                			echo date('Y-m-d H:i:s', time());
-                                			?>
-                <input id="btn" class="button" type='submit' value='登记' onclick="check_info()"></td>
-            </form>
-            <br>
-            <!--搜索-->
-            <form role="form" name='uploadForm' method='post' action='index.php?s=index/index/search'
-                enctype='multipart/form-data'>
-                <div class="search">
-                    <input style="margin-left: 2.1%;" type="text" size="20" name="studentId" placeholder="请输入学号"
-                        required>
-                    <input class="button" type="submit" value="搜索" />
+                <div class="input-group input-inline">
+                    <label class="form-label" for="input-example-1">学号：</label><input type="text" name="studentId"
+                        id="input-example-1" class="form-input" placeholder=" " required>
+                    <label class="form-label" for="input-example-1">&nbsp;姓名：</label><input type="text" name="name"
+                        class="form-input" placeholder=" " required>
+                    <label class="form-label"
+                        for="input-example-1">&nbsp;进入时间：<?php echo date('Y-m-d H:i:s', time());?></label>&nbsp;
+                    <label class="form-label" for="input-example-1"><input id="btn" class="btn btn-primary btn-sm"
+                            type='submit' value='登记' onclick="check_info()"></td></label>
                 </div>
             </form>
-            <br>
         </div>
+        <br>
+
         <div class="columns">
             <div class="col-10 col-mx-auto">
                 <div class="card">
@@ -50,7 +51,6 @@
                                         <th>姓名</th>
                                         <th>进入时间</th>
                                         <th>离开时间</th>
-                                        <!-- <th>备注信息</th> -->
                                         <th>操作</th>
                                     </tr>
                                 </thead>
@@ -62,7 +62,6 @@
                                         <td class="name">{$row.name}</td>
                                         <td class="birthday">{$row.entryTime}</td>
                                         <td class="birthday">{$row.departureTime}</td>
-                                        <!-- <td class="origin-home">{$row.remark}</td> -->
                                         <td>
                                             <?PHP
                                                 if (!$row['departureTime']) {
@@ -88,6 +87,7 @@
 
                     </div>
                 </div>
+
                 {$student->render()}
 
             </div>
