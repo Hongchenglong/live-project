@@ -21,25 +21,18 @@
         function check_info() {
             var name = document.getElementById("txt2").value;
             var num = document.getElementById("txt1").value;
-            reg1 = /^[\u4E00-\u9FA5]{2,6}$/;
+            var reg2 = /^\d{9}$/
+            if (!reg2.test(num)) {
+                alert('请输入9位数的学号！');
+            }
+            reg1 = /^[\u4E00-\u9FA5]{2,8}$/;
             if (!reg1.test(name)) {
                 alert('您输入的名字格式有误！');
             }
-            var reg2 = /^\d{9}$/
-            if (!reg2.test(num)) {
-                alert('您输入的学号格式有误！');
-            }
         }
 
-
-        $(function () {
-            $("#myAlert").bind('closed.bs.alert', function () {
-                alert("警告消息框被关闭。");
-            });
-        });
-
         function del() {
-            alert("删除成功!");
+            alert("删除成功！");
         }
     </script>
 </head>
