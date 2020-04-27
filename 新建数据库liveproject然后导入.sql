@@ -1,67 +1,115 @@
--- phpMyAdmin SQL Dump
--- version 4.8.5
--- https://www.phpmyadmin.net/
---
--- 主机： localhost
--- 生成日期： 2020-04-09 01:07:31
--- 服务器版本： 5.7.26
--- PHP 版本： 7.3.4
+/*
+ Navicat Premium Data Transfer
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-SET time_zone = "+00:00";
+ Source Server         : oeong
+ Source Server Type    : MySQL
+ Source Server Version : 50726
+ Source Host           : localhost:3306
+ Source Schema         : liveproject
 
+ Target Server Type    : MySQL
+ Target Server Version : 50726
+ File Encoding         : 65001
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+ Date: 27/04/2020 16:07:41
+*/
 
---
--- 数据库： `liveproject`
---
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
 
--- --------------------------------------------------------
-
---
--- 表的结构 `student`
---
-
-CREATE TABLE `student` (
-  `id` int(11) NOT NULL,
+-- ----------------------------
+-- Table structure for student
+-- ----------------------------
+DROP TABLE IF EXISTS `student`;
+CREATE TABLE `student`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `studentId` int(9) NOT NULL,
-  `name` varchar(16) NOT NULL,
-  `entryTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `departureTime` timestamp NULL DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `name` varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `entryTime` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `departureTime` timestamp(0) NULL DEFAULT NULL,
+  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `deleted` int(1) NULL DEFAULT 0 COMMENT '1表示已删除，0表示未删除',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 91 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
---
--- 转存表中的数据 `student`
---
+-- ----------------------------
+-- Records of student
+-- ----------------------------
+INSERT INTO `student` VALUES (2, 211706102, '宫本武藏', '2020-04-09 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (3, 211706103, '八木山夜露', '2020-04-10 16:24:00', NULL, NULL, 1);
+INSERT INTO `student` VALUES (4, 211706104, '东方定助', '2020-04-11 16:24:00', NULL, NULL, 1);
+INSERT INTO `student` VALUES (5, 211706105, '广濑康穂', '2020-04-12 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (6, 211706106, '吉良吉影', '2020-04-13 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (7, 211706107, '虚名之王', '2020-04-14 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (8, 211706108, '毛利小五郎', '2020-04-15 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (9, 211706109, '大聪明常秀', '2020-04-16 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (10, 211706110, '江户川柯南', '2020-04-17 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (11, 211706111, '卫青', '2020-04-18 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (12, 211706112, '袁崇焕', '2020-04-19 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (13, 211706113, '老好人爱唱', '2020-04-20 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (14, 211706114, '空条承太郎', '2020-04-21 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (15, 211706115, '空条徐伦', '2020-04-22 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (16, 211706116, '豆铣礼', '2020-04-23 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (17, 211706117, '广濑康穂', '2020-04-24 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (18, 211706118, '卫青', '2020-04-25 16:24:00', NULL, NULL, 1);
+INSERT INTO `student` VALUES (19, 211706119, '田最环', '2020-04-26 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (20, 211706120, '霍去病', '2020-04-27 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (21, 211706121, '霍去病', '2020-04-28 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (22, 211706122, '霍去病', '2020-04-29 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (23, 211706123, '霍去病', '2020-04-30 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (24, 211706124, '文天祥', '2020-05-01 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (25, 211706125, '文天祥', '2020-05-02 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (26, 211706126, '文天祥', '2020-05-03 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (27, 211706127, '文天祥', '2020-05-04 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (28, 211706128, '文天祥', '2020-05-05 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (29, 211706129, '霍去病', '2020-05-06 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (30, 211706130, '霍去病', '2020-05-07 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (31, 211706131, '霍去病', '2020-05-08 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (32, 211706132, '杨业', '2020-05-09 16:24:00', NULL, NULL, 1);
+INSERT INTO `student` VALUES (33, 211706133, '杨业', '2020-05-10 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (34, 211706134, '杨业', '2020-05-11 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (35, 211706135, '杨业', '2020-05-12 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (36, 211706136, '岳飞', '2020-05-13 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (37, 211706137, '岳飞', '2020-05-14 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (38, 211706138, '岳飞', '2020-05-15 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (39, 211706139, '岳飞', '2020-05-16 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (40, 211706140, '岳飞', '2020-05-17 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (41, 211706141, '岳飞', '2020-05-18 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (42, 211706142, '岳飞', '2020-05-19 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (43, 211706143, '杨业', '2020-05-20 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (44, 211706144, '杨业', '2020-05-21 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (45, 211706145, '杨业', '2020-05-22 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (46, 211706146, '杨业', '2020-05-23 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (47, 211706147, '杨业', '2020-05-24 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (48, 211706148, '杨业', '2020-05-25 16:24:00', NULL, NULL, 1);
+INSERT INTO `student` VALUES (49, 211706149, '郑成功', '2020-05-26 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (50, 211706150, '郑成功', '2020-05-27 16:24:00', NULL, NULL, 1);
+INSERT INTO `student` VALUES (1, 211706101, '空条仗世文', '2020-04-08 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (52, 211706174, '空条仗世文', '2020-04-27 12:54:53', NULL, NULL, 1);
+INSERT INTO `student` VALUES (57, 211706174, '空条仗世文', '2020-04-27 14:10:31', NULL, NULL, 1);
+INSERT INTO `student` VALUES (58, 211706174, '空条仗世文', '2020-04-27 14:10:41', NULL, NULL, 1);
+INSERT INTO `student` VALUES (59, 211706174, '空条仗世文', '2020-04-08 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (60, 211706174, '空条仗世文', '2020-04-08 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (61, 211706174, '空条仗世文', '2020-04-08 16:24:00', NULL, NULL, 1);
+INSERT INTO `student` VALUES (62, 211706174, '空条仗世文', '2020-04-08 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (63, 211706174, '空条仗世文', '2020-04-08 16:24:00', NULL, NULL, 1);
+INSERT INTO `student` VALUES (64, 211706174, '空条仗世文', '2020-04-08 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (65, 211706174, '空条仗世文', '2020-04-08 16:24:00', NULL, NULL, 1);
+INSERT INTO `student` VALUES (66, 211706174, '空条仗世文', '2020-04-08 16:24:00', NULL, NULL, 1);
+INSERT INTO `student` VALUES (67, 211706174, '空条仗世文', '2020-04-08 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (68, 211706174, '空条仗世文', '2020-04-08 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (69, 211706174, '空条仗世文', '2020-04-08 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (70, 211706174, '空条仗世文', '2020-04-08 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (71, 211706174, '空条仗世文', '2020-04-08 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (72, 211706174, '空条仗世文', '2020-04-08 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (73, 211706174, '空条仗世文', '2020-04-08 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (74, 211706174, '空条仗世文', '2020-04-08 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (75, 211706174, '空条仗世文', '2020-04-08 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (76, 211706174, '空条仗世文', '2020-04-08 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (77, 211706174, '空条仗世文', '2020-04-08 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (78, 211706174, '空条仗世文', '2020-04-08 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (80, 211706174, '空条仗世文', '2020-04-08 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (81, 211706174, '空条仗世文', '2020-04-08 16:24:00', NULL, NULL, 0);
+INSERT INTO `student` VALUES (90, 211706174, '空条仗世文', '2020-04-08 16:24:00', NULL, NULL, 0);
 
-
---
--- 转储表的索引
---
-
---
--- 表的索引 `student`
---
-ALTER TABLE `student`
-  ADD PRIMARY KEY (`id`);
-
---
--- 在导出的表使用AUTO_INCREMENT
---
-
---
--- 使用表AUTO_INCREMENT `student`
---
-ALTER TABLE `student`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+SET FOREIGN_KEY_CHECKS = 1;

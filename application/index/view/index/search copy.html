@@ -1,0 +1,59 @@
+{include file='public/header' /}
+
+<body>
+    <div id="wrap">
+        <div id="header">
+            <div id="a"><a href='index.php?s=index/index/index'>校园保卫部门</a></div>
+            <ul>
+                <li class="left"><a href="#">登记</a></li>
+                <li class="right"><a href="#">同学信息</a></li>
+            </ul>
+        </div>
+        <br>
+
+        <!--搜索-->
+
+        <div class="search">
+            <form method='post' action='index.php?s=index/index/search' enctype='multipart/form-data'>
+                <input style="margin-left: 3%;" type="text" size="20" name="studentId" placeholder="请输入学号" required>
+                <input class="button" type="submit" value="搜索" />
+            </form>
+        </div>
+
+        
+        <br>
+        <!--显示信息-->
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover table-condensed" cellpadding="0"
+                cellspacing="0">
+                <tr class="head">
+                    <td>学号</td>
+                    <td>姓名</td>
+                    <td>进入时间</td>
+                    <td>离开时间</td>
+                    <td>离开登记</td>
+                </tr>
+                {volist name='student' id='row'}
+                <!-- <tr onmouseover="light(this)" onmouseout="unlight(this)"> -->
+                <tr>
+                    <td>{$row.studentId}</td>
+                    <td>{$row.name}</td>
+                    <td>{$row.entryTime}</td>
+                    <td>{$row.departureTime}</td>
+                    <td>
+                        <?PHP 
+                            if (!$row['departureTime']) {
+                                echo '<a class="btn btn-primary btn-sm" href="index.php?s=index/index/leave&id='.$row['id'].'">离开</a>';
+                            }
+                        ?>
+                    </td>
+                </tr>
+
+                {/volist}
+            </table>
+
+        </div>
+    </div>
+</body>
+
+</html>

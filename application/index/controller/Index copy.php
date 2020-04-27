@@ -12,7 +12,10 @@ use \think\Validate;
 
 class Index extends BaseController
 {
-
+	/**
+	 * 123.56.93.164
+	 * localhost:8080
+	 */
 	public function index()
 	{
 		$student = Db::table('student')
@@ -20,19 +23,6 @@ class Index extends BaseController
 			->where('deleted', 0)
 			->paginate(10);
 		$this->assign("student", $student);
-
-
-		$id = intval(Request::instance()->get('id'));
-		if ($id) {
-			DB::table('student')->where('id', $id)->update(['departureTime' => date('Y-m-d H:i:s')]);
-			$student = Db::table('student')
-				->order('studentId')
-				->where('id', $id)
-				->where('deleted', 0)
-				->paginate(10);
-			$this->assign("student", $student);
-		}
-
 		// 不带任何参数 自动定位当前操作的模板文件
 		return $this->fetch();
 	}
@@ -52,7 +42,6 @@ class Index extends BaseController
 		$data['studentId'] = $studentId;
 		$data['name'] = $name;
 		$data['entryTime'] = $entryTime;
-		$data['deleted'] = 0;
 
 
 
@@ -78,7 +67,7 @@ class Index extends BaseController
 			->order('entryTime desc')
 			->select();
 		$this->assign("student", $student);
-
+		
 		return $this->fetch();
 	}
 
@@ -89,34 +78,15 @@ class Index extends BaseController
 
 		DB::table('student')->where('id', $id)->update(['departureTime' => date('Y-m-d H:i:s')]);
 
-
-		// $student = Db::table('student')
-		// 	->order('studentId')
-		// 	->where('id', $id)
-		// 	->where('deleted', 0)
-		// 	->paginate(10);
-		// $this->assign("student", $student);
-		// header('location: ' . $_SERVER['HTTP_REFERER']);
-		// $this->redirect("http://localhost:8080/live-project/public/index.php?s=index/index/search");
+		$this->redirect("http://localhost:8080/live-project/public/index.php?s=index/index/search");
 	}
 
 
 	public function delete()
 	{
+
 		$id = intval(Request::instance()->get('id'));
-		
-		$student = Db::table('student')
-				->where('id', $id)
-				->update(['deleted' => 1]);
-
-		// $student = Db::table('student')
-		// 	->order('studentId')
-		// 	->where('id', $id)
-		// 	->where('deleted', 0)
-		// 	->paginate(10);
-		$this->assign("student", $student);
-		header('location: ' . $_SERVER['HTTP_REFERER']);
-
-		// $this->redirect("http://localhost:8080/live-project/public/index.php");
+		DB::table('student')->where('id', $id)->update(['deleted'=>1]);
+		$this->redirect("http://localhost:8080/live-project/public/index.php");
 	}
 }
